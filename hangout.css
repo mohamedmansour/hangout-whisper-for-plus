@@ -26,6 +26,12 @@ body {
   border-radius: 5px;
   padding: 10px;
 }
+
+#footer {
+  font-size: 0.9em;
+  padding: 5px;
+  text-align: center;
+}
 /* http://iamkyle.com/sandbox/toggle.html */
 .toggle {background:#ccc;border:#777 1px solid;float:left;height:25px;margin:10px;overflow:hidden;width:60px;-webkit-border-radius:3px;-webkit-box-shadow:#ccc 0 0 2px;}
 .toggle label {cursor:pointer;display:block;left:-34px;position:relative;width:98px;z-index:2;-webkit-transition:left .1s ease-in;}
