@@ -1,0 +1,20 @@
+body {font:12px helvetica;padding:100px;}
+
+#details {
+  display: none;
+  clear: both;
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 10px;
+  width: 300px;
+}
+/* http://iamkyle.com/sandbox/toggle.html */
+.toggle {background:#ccc;border:#777 1px solid;clear:both;float:left;floatheight:25px;margin:10px;overflow:hidden;width:60px;-webkit-border-radius:3px;-webkit-box-shadow:#ccc 0 0 2px;}
+.toggle label {cursor:pointer;display:block;left:-34px;position:relative;width:98px;z-index:2;-webkit-transition:left .1s ease-in;}
+.toggle label.checked {left:0;-webkit-transition:left .1s ease-in;}  
+.toggle input {left:-5000px;position:absolute;}
+.toggle span {float:left;display:block;font-size:12px;font-weight:bold;height:25px;line-height:25px;position:relative;text-align:center;width:34px;z-index:3;}
+.toggle span.on {background:-webkit-gradient(linear,left bottom,left top,color-stop(0.5, #2275be),color-stop(.8, #1c65a5),color-stop(1, #1a5990));color:#FFF;margin-right:-5px;padding-right:5px;text-shadow:#10416c 0 -1px 0;-webkit-border-top-left-radius:2px;-webkit-border-bottom-left-radius:2px;}
+.toggle span.spacer {background:-webkit-gradient(linear,left bottom,left top,color-stop(0.5, #fcfcfc),color-stop(1, #cfcfcf));border-top:#f7f7f7 1px solid;height:24px;margin:0;width:26px;z-index:4;-webkit-box-shadow:#222 0 0 3px;-webkit-border-radius:2px;}
+.toggle span.off {background:-webkit-gradient(linear,left bottom,left top,color-stop(0.5, #ebebeb),color-stop(.8, #d6d6d6), color-stop(1,#a2a2a2));color:#666;float:left;margin-left:-5px;padding-left:5px;text-shadow:#FFF 0 1px 0;-webkit-border-top-right-radius:2px;-webkit-border-bottom-right-radius:2px;}
+                                                            </stylesheetyle>

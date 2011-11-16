@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Multiple Hangout Conversations">
+    <Require feature="rpc"/>
+    <Require feature="views"/>
+  </ModulePrefs>
+  <Content type="html">
+<![CDATA[
+<script src="//hangoutsapi.appspot.com/static/hangout.js"></script>
+<link rel="stylesheet" type="text/css" href="http://mohamedmansour.com/sandbox/multiple-convo-hangouts/hangout.css" />
+
+<div id="main-app">
+  <div>
+    <p>Activate Application:</p> 
+    <div class="toggle">
+      <label class="" id="lblActivate">
+      <input type="checkbox" id="btnActivate"/>
+        <span class="on">on</span>
+        <span class="spacer"></span>
+        <span class="off">off</span>
+      </label>
+    </div>
+    <div id="details">
+      <strong>What to do locally to other participant who are not active in this conversation?</strong>
+      <p>
+        <label for="btnVideo">Mute Video:</label>
+        <input type="checkbox" id="btnVideo"/>
+      </p>
+      <p>
+        <label for="rangeVolume">Volume Level:</label>
+        <input id="rangeVolume" type="range" min="0" max="5" value="2" />
+      </p>
+    </div>
+  </div>
+</div>
+<script src="http://mohamedmansour.com/sandbox/multiple-convo-hangouts/hangout.js"></script>
+]]>
+  </Content>
+</Module>
