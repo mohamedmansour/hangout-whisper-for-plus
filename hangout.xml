@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Multiple Hangout Conversations">
+  <ModulePrefs title="Hangout Whisper for Google+">
     <Require feature="rpc"/>
     <Require feature="views"/>
   </ModulePrefs>
   <Content type="html">
 <![CDATA[
-<script src="//hangoutsapi.appspot.com/static/hangout.js"></script>
+<script src="//hangoutsapi.talkgadget.google.com/hangouts/api/hangout.js?v=0.1"></script>
 <link rel="stylesheet" type="text/css" href="http://mohamedmansour.com/sandbox/multiple-convo-hangouts/hangout.css" />
 
 <div id="main-app">
+  <h1>Hangout Whisper for Google+</h1>
   <div>
-    <p>Activate Application:</p> 
+    <p id="sublabel">Activate Whisper:</p> 
     <div class="toggle">
       <label class="" id="lblActivate">
       <input type="checkbox" id="btnActivate"/>
@@ -21,14 +22,18 @@
       </label>
     </div>
     <div id="details">
-      <strong>What to do locally to other participant who are not active in this conversation?</strong>
+      <strong>For all other participants, you may mute video or volume:</strong>
       <p>
         <label for="btnVideo">Mute Video:</label>
         <input type="checkbox" id="btnVideo"/>
       </p>
       <p>
-        <label for="rangeVolume">Volume Level:</label>
-        <input id="rangeVolume" type="range" min="0" max="5" value="2" />
+        <label for="btnAudio">Mute Audio:</label>
+        <input type="checkbox" id="btnAudio"/>
+      </p>
+      <p style="display:none">
+        <label for="rangeVolume">Volume Level (Disabled, not working):</label>
+        <input id="rangeVolume" type="range" min="0" max="10" value="1" />
       </p>
     </div>
   </div>

@@ -1,49 +1,84 @@
+// DOM Elements.
 var btnActivate = document.getElementById('btnActivate');
 var lblActivate = document.getElementById('lblActivate');
-var details = document.getElementById('details');
+var pnlDetails = document.getElementById('details');
+var rngVolume = document.getElementById('rangeVolume');
+var btnMuteVideo = document.getElementById('btnVideo');
+var btnMuteAudio = document.getElementById('btnAudio');
 
-var volumeDOM = document.getElementById('rangeVolume');
-var videoDOM = document.getElementById('btnVideo');
-
+// My Participant ID.
 var myParticipantID = null;
 
 function onVideoSettingClicked(e) {
-  localStorage['video'] = videoDOM.checked;
+  localStorage['video'] = btnMuteVideo.checked;
+  onDisplayedParticipantChanged(gapi.hangout.getDisplayedParticipant());
+}
+
+function onAudioSettingClicked(e) {
+  localStorage['audio'] = btnMuteAudio.checked;
+  onDisplayedParticipantChanged(gapi.hangout.getDisplayedParticipant());
 }
 
 function onActivateClicked(e) {
   lblActivate.classList.toggle('checked');
-  details.style.display = isActivated() ? 'block' : 'none';
-  localStorage['activated'] = isActivated();
+  var activated = isActivated();
+  pnlDetails.style.display = activated ? 'block' : 'none';
+  localStorage['activated'] = activated;
+  doWhisperAction(gapi.hangout.getDisplayedParticipant(), activated);
+}
+
+function doWhisperAction(displayedParticipant, force) {
+  var participants = gapi.hangout.getParticipants();
+  var muteVideo = btnMuteVideo.checked;
+  var muteAudio = btnMuteAudio.checked;
+  var volumeLevel = parseInt(rngVolume.value);
+  for (var p = 0; p < participants.length; p++) {
+    var participantID = participants[p].id;
+    var isActive = (myParticipantID == participantID || displayedParticipant == participantID);
+
+    var shouldMuteVideo = isActive ? true : !muteVideo;
+    var shouldMuteAudio = isActive ? true : !muteAudio;
+
+    if (force != undefined && !force) {
+      isActive = true;
+      shouldMuteVideo = true;
+      shouldMuteAudio = true;
+    }
+
+    gapi.hangout.av.setParticipantVisible(participantID, shouldMuteVideo);
+    gapi.hangout.av.setParticipantAudible(participantID, shouldMuteAudio);
+    // gapi.hangout.av.setParticipantAudioLevel(participantID, isActive ? 1 : 0);
+  }
 }
 
 function isActivated() {
   return lblActivate.classList.contains('checked');
 }
 
-function onActiveSpeaker(activeParticipantID) {
+function onDisplayedParticipantChanged(data) {
+  console.log('Displayed Participant Changed');
   if (isActivated()) {
-    gapi.hangout.getParticipants(function(participants) {
-      var isVideoEnabled = videoDOM.value;
-      for (var p in participants) {
-        var participantID = participants[p].hangoutId;
-        if (participantID != activeParticipantID &&
-            participantID != myParticipantID) {
-          gapi.hangout.av.setParticipantVisible(participantID, isVideoEnabled);
-        }
-      }
-    });
+    doWhisperAction(gapi.hangout.getDisplayedParticipant());
   }
 }
 
-function apiReady() {
-  console.log('API is ready');
-  btnActivate.addEventListener('click', onActivateClicked, false);
-  videoDOM.addEventListener('click', onVideoSettingClicked, false);
-  gapi.hangout.clearActiveSpeaker();
-  myParticipantID = gapi.hangout.getParticipantId();
-  gapi.hangout.addActiveSpeakerListener(onActiveSpeaker);
-  console.log(gapi.hangout.getActiveSpeaker());
+function apiReady(eventObj) {
+  if (eventObj.isApiReady) {
+    console.log('API is ready');
+    gapi.hangout.clearDisplayedParticipant();
+    myParticipantID = gapi.hangout.getParticipantId();
+
+    // Initialize the listeners for the UI.
+    btnActivate.addEventListener('click', onActivateClicked, false);
+    btnMuteVideo.addEventListener('click', onVideoSettingClicked, false);
+    btnMuteAudio.addEventListener('click', onAudioSettingClicked, false);
+
+    // Initialize the on displayed participant event.
+    gapi.hangout.onDisplayedParticipantChanged.add(onDisplayedParticipantChanged);
+
+    // Start the whisper first.
+    onDisplayedParticipantChanged(gapi.hangout.getDisplayedParticipant());
+  }
 }
 
 // Initialization for gadget.
@@ -57,9 +92,12 @@ function init() {
     lblActivate.classList.remove('checked');
   } 
 
-  videoDOM.checked = localStorage['video'] === 'true' ? 'checked' : '';
-  details.style.display = activated ? 'block' : 'none';
+  btnMuteVideo.checked = localStorage['video'] === 'true' ? 'checked' : '';
+  btnMuteAudio.checked = localStorage['audio'] === 'true' ? 'checked' : '';
+  pnlDetails.style.display = activated ? 'block' : 'none';
+
   console.log('Init App');
-  gapi.hangout.addApiReadyListener(apiReady);
+  gapi.hangout.onApiReady.add(apiReady);
 }
+
 gadgets.util.registerOnLoadHandler(init);

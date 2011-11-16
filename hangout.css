@@ -1,4 +1,23 @@
-body {font:12px helvetica;padding:100px;}
+body {
+  font: 12px helvetica;
+  padding: 100px;
+  background-color: #F4F8FB
+}
+
+#main-app {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  width: 350px;
+  min-height: 100px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+#sublabel {
+  display: block;
+  float: left;
+}
 
 #details {
   display: none;
@@ -6,10 +25,9 @@ body {font:12px helvetica;padding:100px;}
   background-color: #eee;
   border-radius: 5px;
   padding: 10px;
-  width: 300px;
 }
 /* http://iamkyle.com/sandbox/toggle.html */
-.toggle {background:#ccc;border:#777 1px solid;clear:both;float:left;floatheight:25px;margin:10px;overflow:hidden;width:60px;-webkit-border-radius:3px;-webkit-box-shadow:#ccc 0 0 2px;}
+.toggle {background:#ccc;border:#777 1px solid;float:left;height:25px;margin:10px;overflow:hidden;width:60px;-webkit-border-radius:3px;-webkit-box-shadow:#ccc 0 0 2px;}
 .toggle label {cursor:pointer;display:block;left:-34px;position:relative;width:98px;z-index:2;-webkit-transition:left .1s ease-in;}
 .toggle label.checked {left:0;-webkit-transition:left .1s ease-in;}  
 .toggle input {left:-5000px;position:absolute;}
