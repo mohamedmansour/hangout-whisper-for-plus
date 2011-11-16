@@ -19,4 +19,11 @@ yourself and activate the whisper and your done.
 Please fork and contribute code! I hope you get to learn about the API and you 
 will be able to develop your own awesome hangout apps!
 
+Thanks to the following awesome people who helped me test it!
+- Bobbi Jo Woods
+- Jake McCuistion
+- Brian McDonald
+- Dano Hart
+- Lamond B.
+
 
